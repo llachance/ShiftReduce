@@ -5,6 +5,8 @@
  */
 package srrrillumination;
 
+import java.awt.Color;
+
 /**
  *
  * @author v3b2
@@ -15,7 +17,13 @@ public class SRRRIllumination {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        //Code to create GUI
+        GUI g = new GUI();        
+        g.setTitle("Shift Reduce Conflict Illumination");
+        g.getContentPane().setBackground(new Color(240,240,240));
+        
+        //Visible is set to False for testing of other code purposes
+        g.setVisible(true);
     }
     
 }
