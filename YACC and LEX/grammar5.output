@@ -45,21 +45,20 @@ Terminals unused in grammar
 
 Rules useless in parser due to conflicts
 
-
-    3 expression: NUM '>' NUM
+    3 expression: NUM '<' NUM
 
 
 State 7conflicts: 1 reduce/reduce
 
 
-grammar
+Grammar
 
     0 $accept: condition $end
 
     1 condition: expression
-    2          | NUM '>' NUM
+    2          | NUM '<' NUM
 
-    3 expression: NUM '>' NUM
+    3 expression: NUM '<' NUM
     4           | NUM '+' NUM
     5           | NUM
 
@@ -68,7 +67,7 @@ Terminals, with rules where they appear
 
 $end (0) 0
 '+' (43) 4
-'>' (62) 2 3
+'<' (60) 2 3
 error (256)
 ID (258)
 NUM (259) 2 3 4 5
@@ -136,12 +135,12 @@ State 0
 
 State 1
 
-    2 condition: NUM . '>' NUM
-    3 expression: NUM . '>' NUM
+    2 condition: NUM . '<' NUM
+    3 expression: NUM . '<' NUM
     4           | NUM . '+' NUM
     5           | NUM .
 
-    '>'  shift, and go to state 4
+    '<'  shift, and go to state 4
     '+'  shift, and go to state 5
 
     $default  reduce using rule 5 (expression)
@@ -163,8 +162,8 @@ State 3
 
 State 4
 
-    2 condition: NUM '>' . NUM
-    3 expression: NUM '>' . NUM
+    2 condition: NUM '<' . NUM
+    3 expression: NUM '<' . NUM
 
     NUM  shift, and go to state 7
 
@@ -180,13 +179,13 @@ State 6
 
     0 $accept: condition $end .
 
-    $default  accept
+    $default  接受
 
 
 State 7
 
-    2 condition: NUM '>' NUM .
-    3 expression: NUM '>' NUM .
+    2 condition: NUM '<' NUM .
+    3 expression: NUM '<' NUM .
 
     $end      reduce using rule 2 (condition)
     $end      [reduce using rule 3 (expression)]
