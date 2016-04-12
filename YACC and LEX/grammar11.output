@@ -1,0 +1,160 @@
+Terminals unused in grammar
+
+   ID
+   NUM
+   STRING
+   SHARED
+   PRIVATE
+   SEMAPHORE
+   RESTRICT
+   PROGRAM
+   PROCEDURE
+   PROCESS
+   P
+   V
+   ASSERT
+   PRINT
+   WHILE
+   IF
+   THEN
+   ELSE
+   PLUS
+   MINUS
+   TIMES
+   MOD
+   AND
+   OR
+   NOT
+   LE
+   LT
+   EQ
+   GE
+   GT
+   NE
+   ASSIGN
+   LPAREN
+   RPAREN
+   LBRACE
+   RBRACE
+   LBRACKET
+   RBRACKET
+   COMMA
+   SEMICOLON
+   TRUE
+
+
+State 1conflicts: 1 shift/reduce
+
+
+grammar
+
+    0 $accept: S $end
+
+    1 S: INTEGER S INTEGER
+    2  | /* epsilon */
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+ID (258)
+NUM (259)
+STRING (260)
+SHARED (261)
+PRIVATE (262)
+INTEGER (263) 1
+SEMAPHORE (264)
+RESTRICT (265)
+PROGRAM (266)
+PROCEDURE (267)
+PROCESS (268)
+P (269)
+V (270)
+ASSERT (271)
+PRINT (272)
+WHILE (273)
+IF (274)
+THEN (275)
+ELSE (276)
+PLUS (277)
+MINUS (278)
+TIMES (279)
+MOD (280)
+AND (281)
+OR (282)
+NOT (283)
+LE (284)
+LT (285)
+EQ (286)
+GE (287)
+GT (288)
+NE (289)
+ASSIGN (290)
+LPAREN (291)
+RPAREN (292)
+LBRACE (293)
+RBRACE (294)
+LBRACKET (295)
+RBRACKET (296)
+COMMA (297)
+SEMICOLON (298)
+TRUE (299)
+
+
+Nonterminals, with rules where they appear
+
+$accept (45)
+    on left: 0
+S (46)
+    on left: 1 2, on right: 0 1
+
+
+State 0
+
+    0 $accept: . S $end
+
+    INTEGER  shift, and go to state 1
+
+    $default  reduce using rule 2 (S)
+
+    S  go to state 2
+
+
+State 1
+
+    1 S: INTEGER . S INTEGER
+
+    INTEGER  shift, and go to state 1
+
+    INTEGER  [reduce using rule 2 (S)]
+
+    S  go to state 3
+
+
+State 2
+
+    0 $accept: S . $end
+
+    $end  shift, and go to state 4
+
+
+State 3
+
+    1 S: INTEGER S . INTEGER
+
+    INTEGER  shift, and go to state 5
+
+
+State 4
+
+    0 $accept: S $end .
+
+    $default  accept
+
+
+State 5
+
+    1 S: INTEGER S INTEGER .
+
+    $default  reduce using rule 1 (S)

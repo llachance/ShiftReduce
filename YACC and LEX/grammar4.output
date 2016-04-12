@@ -1,0 +1,200 @@
+Terminals unused in grammar
+
+   STRING
+   SHARED
+   PRIVATE
+   INTEGER
+   SEMAPHORE
+   RESTRICT
+   PROGRAM
+   PROCEDURE
+   PROCESS
+   P
+   V
+   ASSERT
+   PRINT
+   WHILE
+   IF
+   THEN
+   ELSE
+   PLUS
+   MINUS
+   TIMES
+   MOD
+   AND
+   OR
+   NOT
+   LE
+   LT
+   EQ
+   GE
+   GT
+   NE
+   ASSIGN
+   LPAREN
+   RPAREN
+   LBRACE
+   RBRACE
+   LBRACKET
+   RBRACKET
+   COMMA
+   SEMICOLON
+   TRUE
+
+
+Rules useless in parser due to conflicts
+
+
+    6 C: /* empty */
+
+
+State 1conflicts: 1 shift/reduce, 3 reduce/reduce
+State 3conflicts: 1 shift/reduce
+State 4conflicts: 1 shift/reduce
+
+
+grammar
+
+    0 $accept: A $end
+
+    1 A: /* empty */
+    2  | A B
+    3  | A C
+
+    4 B: /* empty */
+    5  | B ID
+
+    6 C: /* empty */
+    7  | C NUM
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+ID (258) 5
+NUM (259) 7
+STRING (260)
+SHARED (261)
+PRIVATE (262)
+INTEGER (263)
+SEMAPHORE (264)
+RESTRICT (265)
+PROGRAM (266)
+PROCEDURE (267)
+PROCESS (268)
+P (269)
+V (270)
+ASSERT (271)
+PRINT (272)
+WHILE (273)
+IF (274)
+THEN (275)
+ELSE (276)
+PLUS (277)
+MINUS (278)
+TIMES (279)
+MOD (280)
+AND (281)
+OR (282)
+NOT (283)
+LE (284)
+LT (285)
+EQ (286)
+GE (287)
+GT (288)
+NE (289)
+ASSIGN (290)
+LPAREN (291)
+RPAREN (292)
+LBRACE (293)
+RBRACE (294)
+LBRACKET (295)
+RBRACKET (296)
+COMMA (297)
+SEMICOLON (298)
+TRUE (299)
+
+
+Nonterminals, with rules where they appear
+
+$accept (45)
+    on left: 0
+A (46)
+    on left: 1 2 3, on right: 0 2 3
+B (47)
+    on left: 4 5, on right: 2 5
+C (48)
+    on left: 6 7, on right: 3 7
+
+
+State 0
+
+    0 $accept: . A $end
+
+    $default  reduce using rule 1 (A)
+
+    A  go to state 1
+
+
+State 1
+
+    0 $accept: A . $end
+    2 A: A . B
+    3  | A . C
+
+    $end  shift, and go to state 2
+
+    $end      [reduce using rule 4 (B)]
+    $end      [reduce using rule 6 (C)]
+    ID        reduce using rule 4 (B)
+    ID        [reduce using rule 6 (C)]
+    NUM       reduce using rule 4 (B)
+    NUM       [reduce using rule 6 (C)]
+    $default  reduce using rule 4 (B)
+
+    B  go to state 3
+    C  go to state 4
+
+
+State 2
+
+    0 $accept: A $end .
+
+    $default  accept
+
+
+State 3
+
+    2 A: A B .
+    5 B: B . ID
+
+    ID  shift, and go to state 5
+
+    ID        [reduce using rule 2 (A)]
+    $default  reduce using rule 2 (A)
+
+
+State 4
+
+    3 A: A C .
+    7 C: C . NUM
+
+    NUM  shift, and go to state 6
+
+    NUM       [reduce using rule 3 (A)]
+    $default  reduce using rule 3 (A)
+
+
+State 5
+
+    5 B: B ID .
+
+    $default  reduce using rule 5 (B)
+
+
+State 6
+
+    7 C: C NUM .
+
+    $default  reduce using rule 7 (C)
