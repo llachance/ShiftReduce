@@ -6,6 +6,9 @@
 package srrrillumination;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 /**
@@ -37,17 +40,16 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         grammarField = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        ConflictArea = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
+        graphFrame = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setBackground(new java.awt.Color(204, 204, 204));
         setLocation(new java.awt.Point(15, 15));
         setName("baseFrame"); // NOI18N
@@ -86,9 +88,9 @@ public class GUI extends javax.swing.JFrame {
         grammarField.setRows(5);
         jScrollPane1.setViewportView(grammarField);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        ConflictArea.setColumns(20);
+        ConflictArea.setRows(5);
+        jScrollPane2.setViewportView(ConflictArea);
 
         jLabel3.setText("Conflicts:");
 
@@ -102,33 +104,31 @@ public class GUI extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Conflict Illuminater");
 
-        jInternalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder("Finite Automata"));
-        jInternalFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        jInternalFrame1.setAutoscrolls(true);
-        jInternalFrame1.setDesktopIcon(null);
+        graphFrame.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Finite Automata", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        graphFrame.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        graphFrame.setDesktopIcon(null);
+        graphFrame.setName("graphFrame"); // NOI18N
 
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout graphFrameLayout = new javax.swing.GroupLayout(graphFrame.getContentPane());
+        graphFrame.getContentPane().setLayout(graphFrameLayout);
+        graphFrameLayout.setHorizontalGroup(
+            graphFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        graphFrameLayout.setVerticalGroup(
+            graphFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Finite Automata", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 462, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -156,22 +156,21 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(jScrollPane2)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(graphFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(624, 624, 624))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(graphFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(609, 609, 609)
-                        .addComponent(jInternalFrame1, 0, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,14 +210,26 @@ public class GUI extends javax.swing.JFrame {
                
         // Grabs y.output file that will be passed to scanner written by Logan
         JFileChooser inFile = new JFileChooser();
+        YScanner yy = new YScanner();
         inFile.showOpenDialog(null);
         File input =  inFile.getSelectedFile();
         String filename = input.getAbsolutePath();
         inputField.setText(filename);
-        
-        // Function to take path of file and feed it into Logan's Scanner
-        
-        // Function to take Logan's output of tokens and feed into Andrew's program
+        try {
+            grammarField.setText(yy.grammarReader(input));
+            // Function to take path of file and feed it into Logan's Scanner
+            
+            // Function to take Logan's output of tokens and feed into Andrew's program
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        YScanner yy1 = new YScanner();
+        //conflictFinder needs some polishing to print the whole state. 
+        try {
+            ConflictArea.setText(yy1.conflictFinder(input));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_browseButtonActionPerformed
 
@@ -258,10 +269,11 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea ConflictArea;
     private javax.swing.JButton browseButton;
     private javax.swing.JTextArea grammarField;
+    protected static javax.swing.JInternalFrame graphFrame;
     private javax.swing.JTextField inputField;
-    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -271,7 +283,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }
